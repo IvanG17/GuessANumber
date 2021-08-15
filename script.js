@@ -12,17 +12,22 @@
 const secretNumber = Math.trunc(Math.random() * 25 + 1);
 document.querySelector(".number").textContent = secretNumber;
 
+
 function userClick() {
     let userGuess = Number(document.querySelector(".guess").value);
-    if (!userGuess) {
+    if (!userGuess) { // Event when there is no input 
         document.querySelector(".message").textContent = "No number!";
         wrongGuess();
-    } else if (userGuess === secretNumber) {
+    } else if (userGuess === secretNumber) { // Event where the guess is correct 
         document.querySelector(".message").textContent = "Correct Number- Congratulations!"
-    } else if (userGuess > secretNumber) {
+        document.querySelector("body").style.backgroundColor = "#60b347";
+        document.querySelector(".number").style.width = "30rem";
+
+    } else if (userGuess > secretNumber) { // Event where the guess is too high
+
         document.querySelector(".message").textContent = "Guess too high"
         wrongGuess();
-    } else if (userGuess < secretNumber) {
+    } else if (userGuess < secretNumber) { // Event wehre the guess is too low
         document.querySelector(".message").textContent = "Guess too low"
         wrongGuess();
     }
@@ -33,6 +38,7 @@ function wrongGuess() {
     if (score <= 0) {
         document.querySelector(".score").textContent = score.toString();
         document.querySelector(".message").textContent = "Game over!";
+        timedRefersh(2000);
         return;
 
     }
@@ -41,5 +47,23 @@ function wrongGuess() {
     return;
 }
 
+function again() {
+    document.location.reload();
+}
+
+function timedRefresh(timeoutPeriod) {
+    wait(timeoutPeriod);
+    document.location.reload();
+    return;
+}
+
+function wait(ms) {
+    var start = new Date().getTime();
+    var end = start;
+    while (end < start + ms) {
+        end = new Date().getTime();
+    }
+}
 
 document.querySelector('.check').addEventListener('click', userClick);
+document.querySelector('.again').addEventListener('click', again);
