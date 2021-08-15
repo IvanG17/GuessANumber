@@ -9,7 +9,8 @@
 // console.log(document.querySelector(".guess").value);
 // document
 
-const secretNumber = Math.trunc(Math.random() * 25 + 1);
+let secretNumber = Math.trunc(Math.random() * 25 + 1);
+let highScore = document.querySelector(".highscore").textContent;
 document.querySelector(".number").textContent = secretNumber;
 
 
@@ -22,6 +23,10 @@ function userClick() {
         document.querySelector(".message").textContent = "Correct Number- Congratulations!"
         document.querySelector("body").style.backgroundColor = "#60b347";
         document.querySelector(".number").style.width = "30rem";
+        if (document.querySelector(".score").textContent >= highScore) {
+            highScore = document.querySelector(".score").textContent;
+            document.querySelector(".highscore").textContent = highScore;
+        }
 
     } else if (userGuess > secretNumber) { // Event where the guess is too high
 
@@ -49,6 +54,8 @@ function wrongGuess() {
 
 function again() {
     document.location.reload();
+    //document.querySelector(".highscore").textContent = highScore;
+
 }
 
 function timedRefresh(timeoutPeriod) {
@@ -64,6 +71,7 @@ function wait(ms) {
         end = new Date().getTime();
     }
 }
+
 
 document.querySelector('.check').addEventListener('click', userClick);
 document.querySelector('.again').addEventListener('click', again);
