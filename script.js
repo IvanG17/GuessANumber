@@ -30,8 +30,15 @@ function userClick() {
 
 function wrongGuess() {
     let score = Number(document.querySelector(".score").textContent);
+    if (score <= 0) {
+        document.querySelector(".score").textContent = score.toString();
+        document.querySelector(".message").textContent = "Game over!";
+        return;
+
+    }
     score -= 1;
     document.querySelector(".score").textContent = score.toString();
+    return;
 }
 
 
